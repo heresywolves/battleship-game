@@ -33,3 +33,10 @@ test('ship not sunk if not enought hits', () => {
   newShip.hit();
   expect(newShip.sunk).toBeFalsy();
 });
+
+test('throw an error on wrong attributes', () => {
+  expect(() => { Ship(6); }).toThrow(Error);
+  expect(() => { Ship(-3); }).toThrow(Error);
+  expect(() => { Ship(0); }).toThrow(Error);
+  expect(() => { Ship('sdf'); }).toThrow(Error);
+});
