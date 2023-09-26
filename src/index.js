@@ -1,7 +1,4 @@
-import './style.css'
+import './style.css';
+import Ship from './Ship';
 
-function sum(a, b) {
-  return a + b;
-}
-
-module.exports = sum;
+console.log(Ship());
