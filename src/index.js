@@ -1,7 +1,6 @@
 import './style.css';
 import Ship from './Ship';
+import GameBoard from './GameBoard';
 
-const newShip = Ship(5);
-console.log(newShip);
-newShip.hit();
-console.log(newShip);
+const board = GameBoard();
+console.log(board.board);

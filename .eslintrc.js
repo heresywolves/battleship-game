@@ -28,5 +28,6 @@ module.exports = {
     'no-unused-vars': 0,
     'no-undef': 0,
     'no-console': 0,
+    'no-plusplus': 0,
   },
 };
