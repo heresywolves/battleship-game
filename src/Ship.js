@@ -14,6 +14,7 @@ const Ship = (length) => {
     length,
     sunk,
     hit,
+    orientation: horizontal,
   };
 };
 
