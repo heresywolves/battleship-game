@@ -9,4 +9,5 @@ myBoard.setName('my');
 const enemyBoard = GameBoard();
 enemyBoard.setName('enemy');
 
-uiController.drawBoard(myBoard);
+uiController.drawBoard(myBoard, 'left');
+uiController.drawBoard(enemyBoard, 'right');

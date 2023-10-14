@@ -2,9 +2,14 @@ import GameBoard from './GameBoard';
 
 const uiController = (() => {
   const boardSize = 10;
-  const side = document.querySelector('.left-side');
 
-  function drawBoard(board) {
+  function drawBoard(board, mode) {
+    let side;
+    if (mode === 'left') {
+      side = document.querySelector('.left-side');
+    } else {
+      side = document.querySelector('.right-side');
+    }
     let lineCount = 1;
     let colCount = 1;
     for (let i = 0; i < boardSize * boardSize + 11; i++) {
@@ -43,7 +48,14 @@ const uiController = (() => {
       side.appendChild(square);
     }
   }
-  return { drawBoard };
+
+  function clearBoard() {
+    const squares = document.querySelectorAll('div.square');
+    const text = document.querySelectorAll('p');
+    squares.forEach((sqaure) => sqaure.remove());
+    text.forEach((p) => p.remove());
+  }
+  return { drawBoard, clearBoard };
 })();
 
 export default uiController;

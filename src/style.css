@@ -4,6 +4,12 @@
   padding: 0px;
 }
 
+body {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
 .left-side, .right-side {
   display: grid;
   grid-template-columns: repeat(11, 20px);
