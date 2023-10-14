@@ -20,4 +20,9 @@ body {
   width: 20px;
   height: 20px;
   border: solid 1px black;
+  cursor: pointer;
+}
+
+.square.has-ship {
+  background-color: black;
 }

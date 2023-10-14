@@ -26,43 +26,31 @@ const GameBoard = () => {
   }
 
   function getSquare(x, y) {
-    board.forEach((square) => {
-      if (square.x === x && square.y === y) {
-        return square;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i].x === x && board[i].y === y) {
+        return board[i];
       }
-    });
-    // If the for block didn't return anything
+    }
     return null;
   }
 
   function occupySquare(x, y) {
     const square = getSquare(x, y);
+    console.log(square);
     square.hasShip = true;
   }
 
   function checkPlacementValidity(size, orientation, x, y) {
-    let xOffset = x;
+    const xOffset = x;
     const yOffset = y;
-    let isAvailable = true;
+    const isAvailable = true;
     if (orientation === 'horizontal') {
-      for (;xOffset < size; xOffset++) {
-        // check fid the ship spaces are valid
-        if (y < 1
-           || y > 10
-           || xOffset < 1
-           || xOffset > 10
-           || getSquare(xOffset, y).hasShip === true) {
-          isAvailable = false;
-        }
-        // here we will check for free spaces around the ship as well
-        const square = getSquare(xOffset, yOffset + 1);
-        if (square && square.hasShip === true) {
-          isAvailable = false;
-        }
-        // not finished
-      }
     }
     return isAvailable;
+  }
+
+  function addShipToBoard(ship, x, y) {
+    occupySquare(x, y);
   }
 
   function placeShip(x, y) {
@@ -71,10 +59,18 @@ const GameBoard = () => {
     }
     const size = shipsToPlace.shift();
     const ship = Ship(size);
+    if (checkPlacementValidity(size, 'horizontal', x, y)) {
+      console.log('valid move');
+      console.log('placing ship at ', x, y);
+      addShipToBoard(ship, x, y);
+    } else {
+      console.log('invalid move');
+    }
+    console.log('ship placed successfully. size:', size);
   }
 
   return {
-    board, placeShip, setName, boardSize,
+    board, placeShip, setName, boardSize, shipsToPlace,
   };
 };
 

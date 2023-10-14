@@ -49,12 +49,20 @@ const uiController = (() => {
     }
   }
 
-  function clearBoard() {
-    const squares = document.querySelectorAll('div.square');
-    const text = document.querySelectorAll('p');
+  function clearBoard(mode) {
+    let squares;
+    let text;
+    if (mode === 'left') {
+      squares = document.querySelectorAll('.left-side div.square');
+      text = document.querySelectorAll('.left-side p');
+    } else {
+      squares = document.querySelectorAll('.right-side div.square');
+      text = document.querySelectorAll('.right-side p');
+    }
     squares.forEach((sqaure) => sqaure.remove());
     text.forEach((p) => p.remove());
   }
+
   return { drawBoard, clearBoard };
 })();
 
