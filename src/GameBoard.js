@@ -8,8 +8,8 @@ const GameBoard = () => {
   const shipsToPlace = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
 
   function initBoard() {
-    for (let x = 1; x <= boardSize; x++) {
-      for (let y = 1; y <= boardSize; y++) {
+    for (let y = 1; y <= boardSize; y++) {
+      for (let x = 1; x <= boardSize; x++) {
         board.push({
           x,
           y,
@@ -49,20 +49,25 @@ const GameBoard = () => {
     return isAvailable;
   }
 
-  function addShipToBoard(ship, x, y) {
-    occupySquare(x, y);
+  function addShipToBoard(ship, x, y, direction) {
+    if (direction === 'horizontal') {
+      for (let i = 0; i < ship.length; i++) {
+        occupySquare(x, y);
+        x++;
+      }
+    }
   }
 
   function placeShip(x, y) {
     if (shipsToPlace.length === 0) {
-      throw new Error('Error: Out of available ships to place');
+      console.log('Error: Out of ships to place');
     }
     const size = shipsToPlace.shift();
     const ship = Ship(size);
     if (checkPlacementValidity(size, 'horizontal', x, y)) {
       console.log('valid move');
       console.log('placing ship at ', x, y);
-      addShipToBoard(ship, x, y);
+      addShipToBoard(ship, x, y, 'horizontal');
     } else {
       console.log('invalid move');
     }
