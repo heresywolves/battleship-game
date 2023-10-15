@@ -6,6 +6,7 @@ const GameBoard = () => {
   const board = [];
   // numbers in array represent the sizes of ships
   const shipsToPlace = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
+  let placementDirection = 'horizontal';
 
   function initBoard() {
     for (let y = 1; y <= boardSize; y++) {
@@ -34,17 +35,26 @@ const GameBoard = () => {
     return null;
   }
 
+  function changeDirection() {
+    if (placementDirection === 'horizontal') {
+      placementDirection = 'vertical';
+    } else {
+      placementDirection = 'horizontal';
+    }
+    console.log('placement direction switched');
+  }
+
   function occupySquare(x, y) {
     const square = getSquare(x, y);
     console.log(square);
     square.hasShip = true;
   }
 
-  function checkPlacementValidity(size, orientation, x, y) {
+  function checkPlacementValidity(size, direction, x, y) {
     const xOffset = x;
     const yOffset = y;
     const isAvailable = true;
-    if (orientation === 'horizontal') {
+    if (direction === 'horizontal') {
     }
     return isAvailable;
   }
@@ -55,6 +65,11 @@ const GameBoard = () => {
         occupySquare(x, y);
         x++;
       }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        occupySquare(x, y);
+        y++;
+      }
     }
   }
 
@@ -64,10 +79,10 @@ const GameBoard = () => {
     }
     const size = shipsToPlace.shift();
     const ship = Ship(size);
-    if (checkPlacementValidity(size, 'horizontal', x, y)) {
+    if (checkPlacementValidity(size, placementDirection, x, y)) {
       console.log('valid move');
       console.log('placing ship at ', x, y);
-      addShipToBoard(ship, x, y, 'horizontal');
+      addShipToBoard(ship, x, y, placementDirection);
     } else {
       console.log('invalid move');
     }
@@ -75,7 +90,7 @@ const GameBoard = () => {
   }
 
   return {
-    board, placeShip, setName, boardSize, shipsToPlace,
+    board, placeShip, setName, boardSize, shipsToPlace, changeDirection,
   };
 };
 

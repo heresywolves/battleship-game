@@ -46,3 +46,9 @@ function highlightShipPlacement() {
 const mySquares = document.querySelectorAll('.left-side .square');
 mySquares.forEach((square) => square.addEventListener('click', placeShip));
 mySquares.forEach((square) => square.addEventListener('mouseover', highlightShipPlacement));
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    myBoard.changeDirection();
+  }
+});
