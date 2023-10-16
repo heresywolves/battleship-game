@@ -57,14 +57,16 @@ const GameBoard = () => {
     let isAvailable = true;
     if (direction === 'horizontal') {
       for (let i = 0; i < size; i++) {
-        if (getSquare(xOffset, y) === null) {
+        const square = getSquare(xOffset, y);
+        if (square === null || square.hasShip) {
           isAvailable = false;
         }
         xOffset++;
       }
     } else {
       for (let i = 0; i < size; i++) {
-        if (getSquare(x, yOffset) === null) {
+        const square = getSquare(x, yOffset);
+        if (square === null || square.hasShip) {
           isAvailable = false;
         }
         yOffset++;
@@ -90,8 +92,8 @@ const GameBoard = () => {
   function placeShip(x, y) {
     if (shipsToPlace.length === 0) {
       console.log('Error: Out of ships to place');
+      return;
     }
-    // some sort of bug on line 49
     const size = shipsToPlace[0];
     if (checkPlacementValidity(size, placementDirection, x, y)) {
       const ship = Ship(size);

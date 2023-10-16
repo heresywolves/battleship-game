@@ -36,7 +36,7 @@ function placeShip(e) {
   myBoard.placeShip(x, y);
   uiController.clearBoard('left');
   uiController.drawBoard(myBoard, 'left');
-  console.log(x, y);
+  console.log('clicked on:', x, y);
   refreshListeners();
 }
 
