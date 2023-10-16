@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "wesbos"
+  ],
+  "rules": {
+    // 0 to turn off
+    // 1 for warning
+    // 2 for error
+    "no-unused-vars": 0, 
+    "no-plusplus": 0,
+  }
+}

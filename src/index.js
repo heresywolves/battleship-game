@@ -17,13 +17,16 @@ function refreshListeners() {
   const mySquares = document.querySelectorAll('.left-side .square');
   const enemySquares = document.querySelectorAll('.right-side .square');
   mySquares.forEach((square) => square.removeEventListener('click', placeShip));
-  mySquares.forEach((square) => square.removeEventListener('mouseover', highlightShipPlacement));
+  mySquares.forEach((square) =>
+    square.removeEventListener('mouseover', highlightShipPlacement)
+  );
   mySquares.forEach((square) => square.addEventListener('click', placeShip));
-  mySquares.forEach((square) => square.addEventListener('mouseover', highlightShipPlacement));
+  mySquares.forEach((square) =>
+    square.addEventListener('mouseover', highlightShipPlacement)
+  );
 }
 
 function placeShip(e) {
-  console.log('ship placed');
   const classes = e.target.className;
   const tempArr = classes.split(' ');
   const xString = tempArr[2];
@@ -45,7 +48,9 @@ function highlightShipPlacement() {
 
 const mySquares = document.querySelectorAll('.left-side .square');
 mySquares.forEach((square) => square.addEventListener('click', placeShip));
-mySquares.forEach((square) => square.addEventListener('mouseover', highlightShipPlacement));
+mySquares.forEach((square) =>
+  square.addEventListener('mouseover', highlightShipPlacement)
+);
 
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {

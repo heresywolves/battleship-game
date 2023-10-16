@@ -46,15 +46,29 @@ const GameBoard = () => {
 
   function occupySquare(x, y) {
     const square = getSquare(x, y);
-    console.log(square);
-    square.hasShip = true;
+    square
+      ? (square.hasShip = true)
+      : console.log('Error: no square found to occupy');
   }
 
   function checkPlacementValidity(size, direction, x, y) {
-    const xOffset = x;
-    const yOffset = y;
-    const isAvailable = true;
+    let xOffset = x;
+    let yOffset = y;
+    let isAvailable = true;
     if (direction === 'horizontal') {
+      for (let i = 0; i < size; i++) {
+        if (getSquare(xOffset, y) === null) {
+          isAvailable = false;
+        }
+        xOffset++;
+      }
+    } else {
+      for (let i = 0; i < size; i++) {
+        if (getSquare(x, yOffset) === null) {
+          isAvailable = false;
+        }
+        yOffset++;
+      }
     }
     return isAvailable;
   }
@@ -77,20 +91,28 @@ const GameBoard = () => {
     if (shipsToPlace.length === 0) {
       console.log('Error: Out of ships to place');
     }
-    const size = shipsToPlace.shift();
-    const ship = Ship(size);
+    // some sort of bug on line 49
+    const size = shipsToPlace[0];
     if (checkPlacementValidity(size, placementDirection, x, y)) {
+      const ship = Ship(size);
       console.log('valid move');
       console.log('placing ship at ', x, y);
+      shipsToPlace.shift();
       addShipToBoard(ship, x, y, placementDirection);
     } else {
       console.log('invalid move');
+      return;
     }
     console.log('ship placed successfully. size:', size);
   }
 
   return {
-    board, placeShip, setName, boardSize, shipsToPlace, changeDirection,
+    board,
+    placeShip,
+    setName,
+    boardSize,
+    shipsToPlace,
+    changeDirection,
   };
 };
 
