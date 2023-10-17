@@ -89,8 +89,33 @@ const GameBoard = () => {
         return false;
       }
 
-      // check th sides of the ship for other ships
-      for (let i = 0; i < size + 1; i++) {}
+      // check the sides of the ship for other ships
+      for (let i = 0; i < size; i++) {
+        square = getSquare(xOffset, y + 1);
+        if (!checkSquareAroundShip(square)) {
+          return false;
+        }
+        square = getSquare(xOffset, y - 1);
+        if (!checkSquareAroundShip(square)) {
+          return false;
+        }
+        xOffset++;
+      }
+
+      // check the end of the ship for t=other ships
+      xOffset = x + size;
+      square = getSquare(xOffset, y);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(xOffset, y + 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(xOffset, y - 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
     } else {
       for (let i = 0; i < size; i++) {
         square = getSquare(x, yOffset);
