@@ -39,11 +39,12 @@ const uiController = (() => {
       square.classList.add(`y:${curItem.y}`);
       if (curItem.hasShip) {
         square.classList.add('has-ship');
+        square.classList.add(`shipId:${curItem.shipId}`);
       } else {
         square.classList.add('no-ship');
       }
       if (curItem.attacked) {
-        square.classList.add('attaked');
+        square.classList.add('attacked');
       }
       side.appendChild(square);
     }

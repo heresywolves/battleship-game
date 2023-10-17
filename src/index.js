@@ -97,12 +97,34 @@ function setRandomShips(board) {
   }
 }
 
-function startGame() {
-  const gameActive = false;
+function addListenersToEnemyBoard() {
+  const enemySquares = document.querySelectorAll('.right-side .square');
+  enemySquares.forEach((square) =>
+    square.addEventListener('click', attackEnemy)
+  );
+  enemySquares.forEach((square) =>
+    square.addEventListener('mouseover', highlightAttack)
+  );
+}
 
-  let i = 0;
-  while (i < 5) {
-    i++;
-    console.log(myBoard.ships);
-  }
+function removeListenersFromEnemyBoard() {
+  const enemySquares = document.querySelectorAll('.right-side .square');
+  enemySquares.forEach((square) =>
+    square.removeEventListener('click', attackEnemy)
+  );
+  enemySquares.forEach((square) =>
+    square.removeEventListener('mouseover', highlightAttack)
+  );
+}
+
+function highlightAttack() {
+  console.log('enemy board tracking mouse');
+}
+
+function attackEnemy() {
+  console.log('enemy attacked');
+}
+
+function startGame() {
+  addListenersToEnemyBoard();
 }

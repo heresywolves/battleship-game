@@ -17,6 +17,7 @@ const GameBoard = () => {
           y,
           attacked: false,
           hasShip: false,
+          shipId: 0,
         });
       }
     }
@@ -45,11 +46,14 @@ const GameBoard = () => {
     console.log('placement direction switched');
   }
 
-  function occupySquare(x, y) {
+  function occupySquare(x, y, shipId) {
     const square = getSquare(x, y);
-    square
-      ? (square.hasShip = true)
-      : console.log('Error: no square found to occupy');
+    if (square) {
+      square.hasShip = true;
+      square.shipId = shipId;
+    } else {
+      console.log('Error: no square found to occupy');
+    }
   }
 
   function checkSquareAroundShip(square) {
@@ -176,12 +180,12 @@ const GameBoard = () => {
   function addShipToBoard(ship, x, y, direction) {
     if (direction === 'horizontal') {
       for (let i = 0; i < ship.length; i++) {
-        occupySquare(x, y);
+        occupySquare(x, y, ship.id);
         x++;
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
-        occupySquare(x, y);
+        occupySquare(x, y, ship.id);
         y++;
       }
     }
@@ -217,6 +221,12 @@ const GameBoard = () => {
     return true;
   }
 
+  function attackSquare(x, y) {
+    const square = getSquare(x, y);
+    if (square && square.hasShip) {
+    }
+  }
+
   return {
     board,
     placeShip,
@@ -226,6 +236,7 @@ const GameBoard = () => {
     changeDirection,
     checkIfAllSunk,
     ships,
+    attackSquare,
   };
 };
 

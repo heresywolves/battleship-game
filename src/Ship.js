@@ -1,8 +1,11 @@
+import Id from './shipIds';
+
 const Ship = (length) => {
   // this if statement makes sure we get an appropriate ship length
   if (!Number.isInteger(length) || length > 5 || length <= 0) {
     console.log(`Error: Can't create ship. Length is ${length}`);
   }
+  const id = Id.getNewId();
   const hits = 0;
   const sunk = false;
   function hit() {
@@ -17,6 +20,7 @@ const Ship = (length) => {
     sunk,
     hit,
     orientation: 'horizontal',
+    id,
   };
 };
 
