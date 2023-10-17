@@ -51,21 +51,49 @@ const GameBoard = () => {
       : console.log('Error: no square found to occupy');
   }
 
+  function checkSquareAroundShip(square) {
+    if (square !== null) {
+      if (square.hasShip) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   function checkPlacementValidity(size, direction, x, y) {
+    let square;
     let xOffset = x;
     let yOffset = y;
     let isAvailable = true;
     if (direction === 'horizontal') {
       for (let i = 0; i < size; i++) {
-        const square = getSquare(xOffset, y);
+        square = getSquare(xOffset, y);
         if (square === null || square.hasShip) {
           isAvailable = false;
         }
         xOffset++;
       }
+
+      // check in the front of a ship for other ship
+      xOffset = x;
+      square = getSquare(xOffset - 1, y);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(xOffset - 1, y + 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(xOffset - 1, y - 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+
+      // check th sides of the ship for other ships
+      for (let i = 0; i < size + 1; i++) {}
     } else {
       for (let i = 0; i < size; i++) {
-        const square = getSquare(x, yOffset);
+        square = getSquare(x, yOffset);
         if (square === null || square.hasShip) {
           isAvailable = false;
         }
