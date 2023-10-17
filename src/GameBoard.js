@@ -4,6 +4,7 @@ const GameBoard = () => {
   let name = '';
   const boardSize = 10;
   const board = [];
+  const ships = [];
   // numbers in array represent the sizes of ships
   const shipsToPlace = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
   let placementDirection = 'horizontal';
@@ -198,11 +199,22 @@ const GameBoard = () => {
       console.log('placing ship at ', x, y);
       shipsToPlace.shift();
       addShipToBoard(ship, x, y, placementDirection);
+      ships.push(ship);
     } else {
       console.log('invalid move');
       return;
     }
     console.log('ship placed successfully. size:', size);
+  }
+
+  function checkIfAllSunk() {
+    for (let i = 0; i < ships.length; i++) {
+      const ship = ships[i];
+      if (!ship.sunk) {
+        return false;
+      }
+    }
+    return true;
   }
 
   return {
@@ -212,6 +224,8 @@ const GameBoard = () => {
     boardSize,
     shipsToPlace,
     changeDirection,
+    checkIfAllSunk,
+    ships,
   };
 };
 

@@ -4,6 +4,7 @@ import GameBoard from './GameBoard';
 import uiController from './uiController';
 
 // Game logic
+const gameStarted = true;
 const myBoard = GameBoard();
 myBoard.setName('my');
 
@@ -17,17 +18,36 @@ setRandomShips(enemyBoard);
 uiController.clearBoard('right');
 uiController.drawBoard(enemyBoard, 'right');
 
-function refreshListeners() {
+const mySquares = document.querySelectorAll('.left-side .square');
+mySquares.forEach((square) => square.addEventListener('click', placeShip));
+mySquares.forEach((square) =>
+  square.addEventListener('mouseover', highlightShipPlacement)
+);
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    myBoard.changeDirection();
+  }
+});
+
+function removeEventListenersFromMyBoard() {
   const mySquares = document.querySelectorAll('.left-side .square');
-  const enemySquares = document.querySelectorAll('.right-side .square');
   mySquares.forEach((square) => square.removeEventListener('click', placeShip));
   mySquares.forEach((square) =>
     square.removeEventListener('mouseover', highlightShipPlacement)
   );
+  console.log('removed listeners');
+}
+
+function refreshListeners() {
+  const enemySquares = document.querySelectorAll('.right-side .square');
+  removeEventListenersFromMyBoard();
+  const mySquares = document.querySelectorAll('.left-side .square');
   mySquares.forEach((square) => square.addEventListener('click', placeShip));
   mySquares.forEach((square) =>
     square.addEventListener('mouseover', highlightShipPlacement)
   );
+  console.log('added listeners');
 }
 
 function placeShip(e) {
@@ -41,6 +61,12 @@ function placeShip(e) {
   uiController.clearBoard('left');
   uiController.drawBoard(myBoard, 'left');
   console.log('clicked on:', x, y);
+  if (myBoard.shipsToPlace.length === 0) {
+    removeEventListenersFromMyBoard();
+    console.log('game start');
+    startGame();
+    return;
+  }
   refreshListeners();
 }
 
@@ -49,18 +75,6 @@ function highlightShipPlacement() {
   const nextShipArr = myBoard.shipsToPlace;
   const shipSize = nextShipArr[0];
 }
-
-const mySquares = document.querySelectorAll('.left-side .square');
-mySquares.forEach((square) => square.addEventListener('click', placeShip));
-mySquares.forEach((square) =>
-  square.addEventListener('mouseover', highlightShipPlacement)
-);
-
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') {
-    myBoard.changeDirection();
-  }
-});
 
 function randomInt(max) {
   // from 1 to max including max
@@ -80,5 +94,15 @@ function setRandomShips(board) {
     console.log('itaration: ', i);
     console.log(board.shipsToPlace.length);
     i++;
+  }
+}
+
+function startGame() {
+  const gameActive = false;
+
+  let i = 0;
+  while (i < 5) {
+    i++;
+    console.log(myBoard.ships);
   }
 }
