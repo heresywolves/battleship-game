@@ -129,6 +129,7 @@ function attackEnemy(e) {
   const square = enemyBoard.getSquare(x, y);
   uiController.hitSquare(square, 'right');
   disableSquareListener(square, 'right');
+  checkForGameOver();
   console.log('enemy attacked at: ', x, ' and ', y);
   if (!square.hasShip) {
     getAttacked();
@@ -165,9 +166,21 @@ function getAttacked() {
   myBoard.attackSquare(x, y);
   uiController.hitSquare(square, 'left');
   disableSquareListener(square, 'left');
+  checkForGameOver();
   // this is where enemy attacks again if it was a hit;
   if (square.hasShip) {
     getAttacked();
+  }
+}
+
+function checkForGameOver() {
+  if (myBoard.checkIfAllSunk()) {
+    removeListenersFromEnemyBoard();
+    console.log('you lose');
+  }
+  if (enemyBoard.checkIfAllSunk()) {
+    removeListenersFromEnemyBoard();
+    console.log('you win');
   }
 }
 
