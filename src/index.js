@@ -130,7 +130,9 @@ function attackEnemy(e) {
   uiController.hitSquare(square, 'right');
   disableSquareListener(square, 'right');
   console.log('enemy attacked at: ', x, ' and ', y);
-  getAttacked();
+  if (!square.hasShip) {
+    getAttacked();
+  }
 }
 
 function disableSquareListener(square, side) {
@@ -163,6 +165,10 @@ function getAttacked() {
   myBoard.attackSquare(x, y);
   uiController.hitSquare(square, 'left');
   disableSquareListener(square, 'left');
+  // this is where enemy attacks again if it was a hit;
+  if (square.hasShip) {
+    getAttacked();
+  }
 }
 
 function startGame() {
