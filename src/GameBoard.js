@@ -117,12 +117,56 @@ const GameBoard = () => {
         return false;
       }
     } else {
+      // For the vertical position
       for (let i = 0; i < size; i++) {
         square = getSquare(x, yOffset);
         if (square === null || square.hasShip) {
           isAvailable = false;
         }
         yOffset++;
+      }
+
+      // check in the front of a ship for other ship
+      yOffset = y;
+      square = getSquare(x, yOffset - 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(x + 1, yOffset - 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(x - 1, yOffset - 1);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+
+      // check the sides of the ship for other ships
+      for (let i = 0; i < size; i++) {
+        square = getSquare(x + 1, yOffset);
+        if (!checkSquareAroundShip(square)) {
+          return false;
+        }
+        square = getSquare(x - 1, yOffset);
+        if (!checkSquareAroundShip(square)) {
+          return false;
+        }
+        yOffset++;
+      }
+
+      // check the end of the ship for the other ships
+      yOffset = y + size;
+      square = getSquare(x, yOffset);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(x + 1, yOffset);
+      if (!checkSquareAroundShip(square)) {
+        return false;
+      }
+      square = getSquare(x - 1, yOffset);
+      if (!checkSquareAroundShip(square)) {
+        return false;
       }
     }
     return isAvailable;
