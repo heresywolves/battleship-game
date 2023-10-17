@@ -226,6 +226,7 @@ const GameBoard = () => {
 
   function attackSquare(x, y) {
     const square = getSquare(x, y);
+    square.attacked = true;
     if (square && square.hasShip) {
       // find the ship in this place and hit it
       // const shipId = event.target.className.split('shipId:')[1];

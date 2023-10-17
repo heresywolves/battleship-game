@@ -146,9 +146,20 @@ function disableSquareListener(square, side) {
 }
 
 function getAttacked() {
-  const x = randomInt(10);
-  const y = randomInt(10);
-  const square = myBoard.getSquare(x, y);
+  let x;
+  let y;
+  let square;
+  let i = 0;
+  while (i < 100000) {
+    x = randomInt(10);
+    y = randomInt(10);
+    square = myBoard.getSquare(x, y);
+    console.log(square.attacked);
+    if (!square.attacked) {
+      break;
+    }
+    i++;
+  }
   myBoard.attackSquare(x, y);
   uiController.hitSquare(square, 'left');
   disableSquareListener(square, 'left');
