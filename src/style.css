@@ -10,7 +10,8 @@ body {
   width: 100vw;
 }
 
-.left-side, .right-side {
+.left-side,
+.right-side {
   display: grid;
   grid-template-columns: repeat(11, 20px);
   grid-template-rows: repeat(11, 20px);
@@ -25,4 +26,13 @@ body {
 
 .square.has-ship {
   background-color: black;
+}
+
+.square.has-ship.hit {
+  background-color: red;
+}
+
+.square.no-ship.hit {
+  content: '•';
+  background-color: blue;
 }

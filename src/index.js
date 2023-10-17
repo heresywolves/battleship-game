@@ -121,8 +121,37 @@ function highlightAttack() {
   console.log('enemy board tracking mouse');
 }
 
-function attackEnemy() {
-  console.log('enemy attacked');
+function attackEnemy(e) {
+  const arr = e.target.className.split(' ');
+  const x = +arr[2].split(':')[1];
+  const y = +arr[3].split(':')[1];
+  enemyBoard.attackSquare(x, y);
+  const square = enemyBoard.getSquare(x, y);
+  uiController.hitSquare(square, 'right');
+  disableSquareListener(square, 'right');
+  console.log('enemy attacked at: ', x, ' and ', y);
+  getAttacked();
+}
+
+function disableSquareListener(square, side) {
+  let queryClass;
+  if (side === 'right') {
+    queryClass = `.right-side .id${square.id}`;
+  } else {
+    queryClass = `.left-side .id${square.id}`;
+  }
+  const el = document.querySelector(queryClass);
+  el.removeEventListener('click', attackEnemy);
+  el.removeEventListener('mouseover', highlightAttack);
+}
+
+function getAttacked() {
+  const x = randomInt(10);
+  const y = randomInt(10);
+  const square = myBoard.getSquare(x, y);
+  myBoard.attackSquare(x, y);
+  uiController.hitSquare(square, 'left');
+  disableSquareListener(square, 'left');
 }
 
 function startGame() {

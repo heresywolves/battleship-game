@@ -34,7 +34,7 @@ const uiController = (() => {
 
       const square = document.createElement('div');
       square.classList.add('square');
-      square.classList.add(`${i}`);
+      square.classList.add(`id${i}`);
       square.classList.add(`x:${curItem.x}`);
       square.classList.add(`y:${curItem.y}`);
       if (curItem.hasShip) {
@@ -64,7 +64,18 @@ const uiController = (() => {
     text.forEach((p) => p.remove());
   }
 
-  return { drawBoard, clearBoard };
+  function hitSquare(square, side) {
+    let queryClass;
+    if (side === 'right') {
+      queryClass = `.right-side .id${square.id}`;
+    } else {
+      queryClass = `.left-side .id${square.id}`;
+    }
+    const el = document.querySelector(queryClass);
+    el.classList.add('hit');
+  }
+
+  return { drawBoard, clearBoard, hitSquare };
 })();
 
 export default uiController;

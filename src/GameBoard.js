@@ -10,15 +10,18 @@ const GameBoard = () => {
   let placementDirection = 'horizontal';
 
   function initBoard() {
+    let squareId = 0;
     for (let y = 1; y <= boardSize; y++) {
       for (let x = 1; x <= boardSize; x++) {
         board.push({
+          id: squareId,
           x,
           y,
           attacked: false,
           hasShip: false,
           shipId: 0,
         });
+        squareId++;
       }
     }
   }
@@ -224,6 +227,15 @@ const GameBoard = () => {
   function attackSquare(x, y) {
     const square = getSquare(x, y);
     if (square && square.hasShip) {
+      // find the ship in this place and hit it
+      // const shipId = event.target.className.split('shipId:')[1];
+      ships.forEach((ship) => {
+        if (ship.id === square.shipId) {
+          ship.hit();
+          console.log('Ship hit!');
+          console.log(ship);
+        }
+      });
     }
   }
 
@@ -237,6 +249,7 @@ const GameBoard = () => {
     checkIfAllSunk,
     ships,
     attackSquare,
+    getSquare,
   };
 };
 
