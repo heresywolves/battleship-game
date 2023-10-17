@@ -13,6 +13,10 @@ enemyBoard.setName('enemy');
 uiController.drawBoard(myBoard, 'left');
 uiController.drawBoard(enemyBoard, 'right');
 
+setRandomShips(enemyBoard);
+uiController.clearBoard('right');
+uiController.drawBoard(enemyBoard, 'right');
+
 function refreshListeners() {
   const mySquares = document.querySelectorAll('.left-side .square');
   const enemySquares = document.querySelectorAll('.right-side .square');
@@ -57,3 +61,24 @@ document.addEventListener('keydown', (e) => {
     myBoard.changeDirection();
   }
 });
+
+function randomInt(max) {
+  // from 1 to max including max
+  return Math.floor(Math.random() * max) + 1;
+}
+
+function setRandomShips(board) {
+  let i = 0;
+  while (i < 10000) {
+    if (board.shipsToPlace.length === 0) {
+      break;
+    }
+    board.changeDirection();
+    const randX = randomInt(10);
+    const randY = randomInt(10);
+    board.placeShip(randX, randY);
+    console.log('itaration: ', i);
+    console.log(board.shipsToPlace.length);
+    i++;
+  }
+}
