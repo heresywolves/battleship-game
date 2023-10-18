@@ -220,14 +220,15 @@ function getAttacked(xCoord, yCoord) {
 function checkForGameOver() {
   if (myBoard.checkIfAllSunk()) {
     removeListenersFromEnemyBoard();
-    uiController.displayGameOver('You lose!');
+    uiController.displayGameOver('You lose! \n Refresh to play again');
   }
   if (enemyBoard.checkIfAllSunk()) {
     removeListenersFromEnemyBoard();
-    uiController.displayGameOver('You win!');
+    uiController.displayGameOver('You win! \n Refresh to play again');
   }
 }
 
 function startGame() {
+  document.querySelector('.instructions').textContent = 'Good luck!';
   addListenersToEnemyBoard();
 }

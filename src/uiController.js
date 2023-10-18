@@ -77,11 +77,7 @@ const uiController = (() => {
   }
 
   function displayGameOver(message) {
-    const body = document.querySelector('body');
-    const p = document.createElement('p');
-    p.classList.add('game-over-message');
-    p.textContent = message;
-    body.appendChild(p);
+    document.querySelector('.instructions').textContent = message;
   }
 
   function playClick() {
