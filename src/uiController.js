@@ -1,5 +1,4 @@
 import GameBoard from './GameBoard';
-import Click from './click.ogg';
 
 const uiController = (() => {
   const boardSize = 10;
@@ -80,12 +79,7 @@ const uiController = (() => {
     document.querySelector('.instructions').textContent = message;
   }
 
-  function playClick() {
-    const audio = new Audio(Click);
-    audio.play();
-  }
-
-  return { drawBoard, clearBoard, hitSquare, displayGameOver, playClick };
+  return { drawBoard, clearBoard, hitSquare, displayGameOver };
 })();
 
 export default uiController;

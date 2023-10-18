@@ -158,7 +158,6 @@ function highlightAttack(e) {
 }
 
 function attackEnemy(e) {
-  uiController.playClick();
   const arr = e.target.className.split(' ');
   const x = +arr[2].split('-')[1];
   const y = +arr[3].split('-')[1];
@@ -194,9 +193,10 @@ function getAttacked(xCoord, yCoord) {
     x = xCoord || randomInt(10);
     y = yCoord || randomInt(10);
     square = myBoard.getSquare(x, y);
-    console.log(square.attacked);
-    if (!square.attacked) {
-      break;
+    if (square) {
+      if (!square.attacked) {
+        break;
+      }
     }
     xCoord = null;
     yCoord = null;
