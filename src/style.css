@@ -5,9 +5,12 @@
 }
 
 body {
+  width: 100vw;
+}
+
+.top-container {
   display: flex;
   justify-content: space-between;
-  width: 100vw;
 }
 
 .left-side,
