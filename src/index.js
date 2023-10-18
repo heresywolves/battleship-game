@@ -71,7 +71,6 @@ function placeShip(e) {
 }
 
 function highlightShipPlacement(e) {
-  console.log('event tracking active');
   const nextShipArr = myBoard.shipsToPlace;
   const shipSize = nextShipArr[0];
   const elements = document.querySelectorAll('.left-side .square');
@@ -79,15 +78,31 @@ function highlightShipPlacement(e) {
     el.classList.remove('highlight');
   });
   e.target.classList.add('highlight');
-  if (myBoard.placementDirection === 'horizontal') {
-    const x = e.target.className.split(' ')[2].split('-')[1];
-    const y = e.target.className.split(' ')[3].split('-')[1];
+  const direction = myBoard.getDirection();
+  if (direction === 'horizontal') {
+    let x = +e.target.className.split(' ')[2].split('-')[1];
+    const y = +e.target.className.split(' ')[3].split('-')[1];
     for (let i = 0; i < shipSize; i++) {
       if (x && y) {
-        const query = `x-${x}`;
-        console.log(`requsting ${query}`);
+        const query = `.x-${x}.y-${y}`;
         const square = document.querySelector(query);
-        console.log(square);
+        if (square) {
+          square.classList.add('highlight');
+        }
+        x++;
+      }
+    }
+  } else {
+    const x = +e.target.className.split(' ')[2].split('-')[1];
+    let y = +e.target.className.split(' ')[3].split('-')[1];
+    for (let i = 0; i < shipSize; i++) {
+      if (x && y) {
+        const query = `.x-${x}.y-${y}`;
+        const square = document.querySelector(query);
+        if (square) {
+          square.classList.add('highlight');
+        }
+        y++;
       }
     }
   }

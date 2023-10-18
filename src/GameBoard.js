@@ -46,7 +46,11 @@ const GameBoard = () => {
     } else {
       placementDirection = 'horizontal';
     }
-    console.log('placement direction switched');
+    console.log(`placement direction switched: ${placementDirection}`);
+  }
+
+  function getDirection() {
+    return placementDirection;
   }
 
   function occupySquare(x, y, shipId) {
@@ -251,7 +255,7 @@ const GameBoard = () => {
     ships,
     attackSquare,
     getSquare,
-    placementDirection,
+    getDirection,
   };
 };
 
