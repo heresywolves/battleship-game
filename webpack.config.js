@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 module.exports = {
@@ -6,8 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),    
-    clean: false,
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -20,16 +18,8 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.(?:js|mjs|cjs)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
-            ]
-          }
-        }
+        test: /\.(ogg|wav|mp3)$/i,
+        use: 'file-loader',
       },
     ],
   },

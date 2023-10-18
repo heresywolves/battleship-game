@@ -35,8 +35,16 @@ test('ship not sunk if not enought hits', () => {
 });
 
 test('throw an error on wrong attributes', () => {
-  expect(() => { Ship(6); }).toThrow(Error);
-  expect(() => { Ship(-3); }).toThrow(Error);
-  expect(() => { Ship(0); }).toThrow(Error);
-  expect(() => { Ship('sdf'); }).toThrow(Error);
+  expect(() => {
+    Ship(6);
+  }).toThrow(Error);
+  expect(() => {
+    Ship(-3);
+  }).toThrow(Error);
+  expect(() => {
+    Ship(0);
+  }).toThrow(Error);
+  expect(() => {
+    Ship('sdf');
+  }).toThrow(Error);
 });
