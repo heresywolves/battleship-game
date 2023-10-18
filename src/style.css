@@ -15,6 +15,11 @@ p {
   text-align: center;
 }
 
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
 img {
   width: 200px;
   margin-top: 100px;

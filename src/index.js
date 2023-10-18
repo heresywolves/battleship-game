@@ -2,6 +2,11 @@ import './style.css';
 import Ship from './Ship';
 import GameBoard from './GameBoard';
 import uiController from './uiController';
+import Racoon from './racoon.jpg';
+
+const image1 = new Image();
+image1.src = Racoon;
+document.querySelector('.img-container').appendChild(image1);
 
 // Game logic
 const gameStarted = true;
