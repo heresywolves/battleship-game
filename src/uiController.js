@@ -1,4 +1,5 @@
 import GameBoard from './GameBoard';
+import Click from './click.ogg';
 
 const uiController = (() => {
   const boardSize = 10;
@@ -75,7 +76,20 @@ const uiController = (() => {
     el.classList.add('hit');
   }
 
-  return { drawBoard, clearBoard, hitSquare };
+  function displayGameOver(message) {
+    const body = document.querySelector('body');
+    const p = document.createElement('p');
+    p.classList.add('game-over-message');
+    p.textContent = message;
+    body.appendChild(p);
+  }
+
+  function playClick() {
+    const audio = new Audio(Click);
+    audio.play();
+  }
+
+  return { drawBoard, clearBoard, hitSquare, displayGameOver, playClick };
 })();
 
 export default uiController;

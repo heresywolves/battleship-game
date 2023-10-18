@@ -122,6 +122,7 @@ function highlightAttack() {
 }
 
 function attackEnemy(e) {
+  uiController.playClick();
   const arr = e.target.className.split(' ');
   const x = +arr[2].split(':')[1];
   const y = +arr[3].split(':')[1];
@@ -148,19 +149,21 @@ function disableSquareListener(square, side) {
   el.removeEventListener('mouseover', highlightAttack);
 }
 
-function getAttacked() {
+function getAttacked(xCoord, yCoord) {
   let x;
   let y;
   let square;
   let i = 0;
   while (i < 100000) {
-    x = randomInt(10);
-    y = randomInt(10);
+    x = xCoord || randomInt(10);
+    y = yCoord || randomInt(10);
     square = myBoard.getSquare(x, y);
     console.log(square.attacked);
     if (!square.attacked) {
       break;
     }
+    xCoord = null;
+    yCoord = null;
     i++;
   }
   myBoard.attackSquare(x, y);
@@ -168,19 +171,24 @@ function getAttacked() {
   disableSquareListener(square, 'left');
   checkForGameOver();
   // this is where enemy attacks again if it was a hit;
+  // it will attempt to hit nearby
   if (square.hasShip) {
-    getAttacked();
+    if (randomInt(2) - 1) {
+      randomInt(2) - 1 ? getAttacked(x + 1, y) : getAttacked(x, y + 1);
+    } else {
+      randomInt(2) - 1 ? getAttacked(x - 1, y) : getAttacked(x, y - 1);
+    }
   }
 }
 
 function checkForGameOver() {
   if (myBoard.checkIfAllSunk()) {
     removeListenersFromEnemyBoard();
-    console.log('you lose');
+    uiController.displayGameOver('You lose!');
   }
   if (enemyBoard.checkIfAllSunk()) {
     removeListenersFromEnemyBoard();
-    console.log('you win');
+    uiController.displayGameOver('You win!');
   }
 }
 
