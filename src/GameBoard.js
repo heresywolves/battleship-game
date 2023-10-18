@@ -251,6 +251,7 @@ const GameBoard = () => {
     ships,
     attackSquare,
     getSquare,
+    placementDirection,
   };
 };
 

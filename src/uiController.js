@@ -36,8 +36,8 @@ const uiController = (() => {
       const square = document.createElement('div');
       square.classList.add('square');
       square.classList.add(`id${i}`);
-      square.classList.add(`x:${curItem.x}`);
-      square.classList.add(`y:${curItem.y}`);
+      square.classList.add(`x-${curItem.x}`);
+      square.classList.add(`y-${curItem.y}`);
       if (curItem.hasShip) {
         square.classList.add('has-ship');
         square.classList.add(`shipId:${curItem.shipId}`);

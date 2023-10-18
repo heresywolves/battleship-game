@@ -55,8 +55,8 @@ function placeShip(e) {
   const tempArr = classes.split(' ');
   const xString = tempArr[2];
   const yString = tempArr[3];
-  const x = +xString.split(':')[1];
-  const y = +yString.split(':')[1];
+  const x = +xString.split('-')[1];
+  const y = +yString.split('-')[1];
   myBoard.placeShip(x, y);
   uiController.clearBoard('left');
   uiController.drawBoard(myBoard, 'left');
@@ -70,10 +70,27 @@ function placeShip(e) {
   refreshListeners();
 }
 
-function highlightShipPlacement() {
+function highlightShipPlacement(e) {
   console.log('event tracking active');
   const nextShipArr = myBoard.shipsToPlace;
   const shipSize = nextShipArr[0];
+  const elements = document.querySelectorAll('.left-side .square');
+  elements.forEach((el) => {
+    el.classList.remove('highlight');
+  });
+  e.target.classList.add('highlight');
+  if (myBoard.placementDirection === 'horizontal') {
+    const x = e.target.className.split(' ')[2].split('-')[1];
+    const y = e.target.className.split(' ')[3].split('-')[1];
+    for (let i = 0; i < shipSize; i++) {
+      if (x && y) {
+        const query = `x-${x}`;
+        console.log(`requsting ${query}`);
+        const square = document.querySelector(query);
+        console.log(square);
+      }
+    }
+  }
 }
 
 function randomInt(max) {
@@ -124,8 +141,8 @@ function highlightAttack() {
 function attackEnemy(e) {
   uiController.playClick();
   const arr = e.target.className.split(' ');
-  const x = +arr[2].split(':')[1];
-  const y = +arr[3].split(':')[1];
+  const x = +arr[2].split('-')[1];
+  const y = +arr[3].split('-')[1];
   enemyBoard.attackSquare(x, y);
   const square = enemyBoard.getSquare(x, y);
   uiController.hitSquare(square, 'right');

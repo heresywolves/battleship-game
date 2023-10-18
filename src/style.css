@@ -39,3 +39,7 @@ body {
   content: '•';
   background-color: blue;
 }
+
+.left-side .square.highlight {
+  background-color: gray;
+}
