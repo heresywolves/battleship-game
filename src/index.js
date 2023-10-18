@@ -149,8 +149,12 @@ function removeListenersFromEnemyBoard() {
   );
 }
 
-function highlightAttack() {
-  console.log('enemy board tracking mouse');
+function highlightAttack(e) {
+  const elements = document.querySelectorAll('.right-side .square');
+  elements.forEach((el) => {
+    el.classList.remove('highlight');
+  });
+  e.target.classList.add('highlight');
 }
 
 function attackEnemy(e) {

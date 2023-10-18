@@ -43,3 +43,16 @@ body {
 .left-side .square.highlight {
   background-color: gray;
 }
+
+.right-side .square {
+  text-align: center;
+}
+
+.right-side .square.highlight:after {
+  color: black;
+  font-size: 20px;
+  font-weight: 800;
+  content: 'x';
+  position: relative;
+  bottom: 4px;
+}
