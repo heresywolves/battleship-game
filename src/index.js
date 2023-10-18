@@ -4,6 +4,7 @@ import GameBoard from './GameBoard';
 import uiController from './uiController';
 import Racoon from './racoon.jpg';
 
+// loading a racoon
 const image1 = new Image();
 image1.src = Racoon;
 document.querySelector('.img-container').appendChild(image1);
